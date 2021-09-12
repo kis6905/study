@@ -1,7 +1,7 @@
 package study.java.basics;
 
 /**
- * Chapter04 - �迭
+ * Chapter04 -배열
  */
 public class Ch04 {
 

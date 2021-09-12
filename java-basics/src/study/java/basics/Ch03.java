@@ -1,11 +1,11 @@
 package study.java.basics;
 
 /**
- * Chapter03 - Á¶°Ç¹®°ú ¹Ýº¹¹®
- * - if - else ¹®
- * - switch ¹®
- * - for ¹® / for each ¹®
- * - while ¹® / do-while ¹®
+ * Chapter03 - ì¡°ê±´ë¬¸ê³¼ ë°˜ë³µë¬¸
+ * - if - else ë¬¸
+ * - switch ë¬¸
+ * - for ë¬¸ / for each ë¬¸
+ * - while ë¬¸ / do-while ë¬¸
  * - break, continue
  */
 public class Ch03 {

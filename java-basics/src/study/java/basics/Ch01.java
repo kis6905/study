@@ -1,11 +1,11 @@
 package study.java.basics;
 
 /**
- * Chapter01 - º¯¼ö(Variable)
- * - º¯¼ö¶õ?
- * - º¯¼öÀÇ ¼±¾ğ
- * - º¯¼ö Å¸ÀÔ
- * - Çüº¯È¯
+ * Chapter01 - ë³€ìˆ˜(Variable)
+ * - ë³€ìˆ˜ë€?
+ * - ë³€ìˆ˜ì˜ ì„ ì–¸
+ * - ë³€ìˆ˜ íƒ€ì…
+ * - í˜•ë³€í™˜
  */
 public class Ch01 {
 
