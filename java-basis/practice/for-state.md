@@ -1,7 +1,7 @@
 # for문 연습문제
 
 ### 1. Scanner로 입력받은 값 input 만큼 1부터 출력
-```
+```java
 Scanner scanner = new Scanner(System.in);
 int input = scanner.nextInt();
 
@@ -17,7 +17,7 @@ Example
 ```
 
 ### 1-1. Scanner로 입력받은 값 input 에서부터 1까지 역으로 출력
-```
+```java
 Scanner scanner = new Scanner(System.in);
 int input = scanner.nextInt();
 
@@ -73,7 +73,7 @@ Example
 
 ## 숙제
 ### 1. 1~10까지 홀수의 합을 출력
-```
+```java
 int total = 0;
 
 // TODO
