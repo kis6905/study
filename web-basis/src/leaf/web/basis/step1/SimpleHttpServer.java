@@ -1,4 +1,4 @@
-package leaf.web.basis;
+package leaf.web.basis.step1;
 
 import java.io.BufferedWriter;
 import java.io.InputStream;
@@ -11,6 +11,7 @@ public class SimpleHttpServer {
 
 	private static final int BUFFER_SIZE = 4096;
 	
+	@SuppressWarnings("resource")
 	public static void main(String[] args) throws Exception {
 		
 		ServerSocket serverSocket = new ServerSocket(8080);
@@ -39,6 +40,8 @@ public class SimpleHttpServer {
 			
 			System.out.println("request: ");
 			System.out.println(requestBuffer.toString());
+			
+			Thread.sleep(2000);
 			
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(output));
 			bw.write("HTTP/1.1 200 OK\n");
