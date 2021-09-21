@@ -2,6 +2,7 @@ package leaf.web.basis.step2;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.Map;
 
 public class HttpRequest {
@@ -20,6 +21,17 @@ public class HttpRequest {
 		BODY_LINE
 	}
 	
+	public enum HttpMethod {
+		GET,
+		POST,
+		PUT,
+		DELETE;
+		
+		public static boolean isGet(String method) {
+			return GET.name().equalsIgnoreCase(method);
+		}
+	}
+	
 	public HttpRequest(InputStream input) {
 		parse(input);
 	}
@@ -27,16 +39,17 @@ public class HttpRequest {
 	private void parse(InputStream input) {
 		try {
 			String requestRaw = read(input);
-			
 			String[] requestLines = requestRaw.toString().split("\n");
+			RequestLineType lineType = RequestLineType.REQUEST_LINE;
 			for (int idx = 0; idx < requestLines.length; idx++) {
 				String line = requestLines[idx];
-				RequestLineType lineType = null;
 				if (idx == 0) {
 					parseRequestLine(line);
 					lineType = RequestLineType.HEADER_LINE;
-				} else if (line != null && line.isEmpty()) {
+					continue;
+				} else if (line.isEmpty()) {
 					lineType = RequestLineType.BODY_LINE;
+					continue;
 				}
 				
 				switch (lineType) {
@@ -46,19 +59,18 @@ public class HttpRequest {
 				case BODY_LINE:
 					
 					break;
+				default:
+					break;
 				}
 			}
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 	}
 	
 	private String read(InputStream input) throws IOException {
 		byte[] buffer = new byte[BUFFER_SIZE];
 		StringBuilder requestBuffer = new StringBuilder();
-		
 		int i = 0;
 		while (true) {
 			buffer = new byte[BUFFER_SIZE];
@@ -66,7 +78,6 @@ public class HttpRequest {
 	        for (int j = 0; j < i; j++) {
 	            requestBuffer.append((char) buffer[j]);
 	        }
-	        
 	        if (input.available() <= 0) {
 	        	break;
 	        }
@@ -74,8 +85,25 @@ public class HttpRequest {
 		return requestBuffer.toString();
 	}
 	
-	private void parseRequestLine(String line) {
+	private void parseRequestLine(String line) throws Exception {
+		String[] requestInfos = line.split(" ");
+		this.method = requestInfos[0];
 		
+		String[] uriInfos = requestInfos[1].split("\\?");
+		this.uri = uriInfos[0];
+		
+		if (HttpMethod.isGet(this.method) && uriInfos.length >= 2) {
+			parseQueryString(uriInfos[1]);
+		}
+	}
+	
+	private void parseQueryString(String queryString) {
+		String[] params = queryString.split("\\&");
+		this.parameters = new HashMap<>();
+		for (String param : params) {
+			String[] pair = param.split("=");
+			this.parameters.put(pair[0], pair[1]);
+		}
 	}
 	
 	private void parseAndAddHeader(String line) {
@@ -85,4 +113,35 @@ public class HttpRequest {
 	private void parseRequestBody(String line) {
 		
 	}
+	
+	public String getUri() {
+		return uri;
+	}
+
+	public String getMethod() {
+		return method;
+	}
+
+	public Map<String, String> getHeaders() {
+		return headers;
+	}
+
+	public Map<String, String> getParameters() {
+		return parameters;
+	}
+
+	public Map<String, String> getCookies() {
+		return cookies;
+	}
+
+	public String getBody() {
+		return body;
+	}
+
+	@Override
+	public String toString() {
+		return "HttpRequest [uri=" + uri + ", method=" + method + ", headers="
+				+ headers + ", parameters=" + parameters + ", cookies=" + cookies + ", body=" + body + "]";
+	}
+	
 }

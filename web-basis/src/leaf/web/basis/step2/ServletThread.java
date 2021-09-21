@@ -8,7 +8,7 @@ import java.io.OutputStreamWriter;
 import java.net.Socket;
 
 public class ServletThread extends Thread {
-	private static final String REQUEST_THREAD_PREFIX = "request_";
+	private static final String REQUEST_THREAD_PREFIX = "http_servlet";
 	
 	private Socket socket;
 	
@@ -25,6 +25,7 @@ public class ServletThread extends Thread {
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(output));
 		) {
 			HttpRequest httpRequest = new HttpRequest(input);
+			System.out.println("[" + Thread.currentThread().getName() + "] " + httpRequest.toString());
 			
 			bw.write("HTTP/1.1 200 OK\n");
 			bw.write("content-type: text/html;\n");
@@ -32,7 +33,7 @@ public class ServletThread extends Thread {
 			bw.write("<h1>hello world</h1>");
 			bw.flush();
 			
-			System.out.println("\n\n");
+			System.out.println();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

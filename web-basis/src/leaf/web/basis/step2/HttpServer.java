@@ -9,7 +9,7 @@ public class HttpServer {
 	public static void main(String[] args) throws Exception {
 		
 		ServerSocket serverSocket = new ServerSocket(8080);
-		System.out.println("Start http server...\n");
+		System.out.println("[" + Thread.currentThread().getName() + "] " + "Start http server...\n");
 		while (true) {
 			Socket socket = serverSocket.accept();
 			
