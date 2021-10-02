@@ -8,10 +8,9 @@
 - HttpRequest, HttpResopnse
 - HttpSession
 ## 3. HTTPS 란?
-- TLS(SSL)
 - 암복호화
   - 대칭키 암호화
   - 비대칭키 암호화
 - Hash 알고리즘
-- TSL 인증서란?
+- TLS(SSL)
 - TSL Handshake
