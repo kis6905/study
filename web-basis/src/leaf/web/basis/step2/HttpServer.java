@@ -14,7 +14,7 @@ public class HttpServer {
 			Socket socket = serverSocket.accept();
 			
 			Thread servletThread = new ServletThread(socket);
-			servletThread.start();
+			servletThread.run();
 			
 			System.out.println("\n\n");
 		}

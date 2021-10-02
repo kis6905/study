@@ -9,49 +9,56 @@ import java.net.Socket;
 
 public class SimpleHttpServer {
 
-	private static final int BUFFER_SIZE = 4096;
-	
 	@SuppressWarnings("resource")
 	public static void main(String[] args) throws Exception {
 		
 		ServerSocket serverSocket = new ServerSocket(8080);
 		System.out.println("Start http server...\n");
+		
 		while (true) {
 			Socket socket = serverSocket.accept();
-			
 			InputStream input = socket.getInputStream();
 			OutputStream output = socket.getOutputStream();
-			
-			byte[] buffer = new byte[BUFFER_SIZE];
+			byte[] buffer = new byte[2048];
 			StringBuilder requestBuffer = new StringBuilder();
 			
 			int i = 0;
-			while (true) {
-				buffer = new byte[BUFFER_SIZE];
+			while (input.available() > 0) {
+				buffer = new byte[2048];
 	            i = input.read(buffer);
 		        for (int j = 0; j < i; j++) {
 		            requestBuffer.append((char) buffer[j]);
-		        }
-		        
-		        if (input.available() <= 0) {
-		        	break;
 		        }
 			}
 			
 			System.out.println("request: ");
 			System.out.println(requestBuffer.toString());
-			
-			Thread.sleep(2000);
+			System.out.println("-----------------------------");
 			
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(output));
-			bw.write("HTTP/1.1 200 OK\n");
-			bw.write("content-type: text/html;\n");
-			bw.write("\n");
-			bw.write("<h1>hello world</h1>");
+//			bw.write("HTTP/1.1 200 OK\n");
+//			bw.write("content-type: text/plain;\n");
+//			bw.write("\n");
+//			bw.write("<h1>hello world</h1>\n");
 			
+			String response = """
+					HTTP/1.1 200 OK
+					content-type: text/html;charset=utf8;
+					set-cookie: mycookie=abc; cookie2=bbb;
+					
+					<h1>hello world</h1>
+					<form action="/user" method="post">
+						<input type="text" name="name" value="leaf" /><br/>
+						<input type="text" name="addr" value="goyang" /><br/>
+						<input type="file" name="file" /><br/>
+						<button type="submit">전송</submit>
+					</form>
+					""";
+			bw.write(response);
 			bw.flush();
-			input.close();
+			
 			bw.close();
+			input.close();
 			socket.close();
 			
 			System.out.println("\n\n");

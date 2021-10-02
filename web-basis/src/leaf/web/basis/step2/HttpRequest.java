@@ -10,10 +10,10 @@ public class HttpRequest {
 	
 	private String uri;
 	private String method;
-	private Map<String, String> headers;
-	private Map<String, String> parameters;
-	private Map<String, String> cookies;
-	private String body;
+	private Map<String, String> headers = new HashMap<>();
+	private Map<String, String> parameters = new HashMap<>();
+	private Map<String, String> cookies = new HashMap<>();
+	private String body = "";
 	
 	private enum RequestLineType {
 		REQUEST_LINE,
@@ -39,25 +39,27 @@ public class HttpRequest {
 	private void parse(InputStream input) {
 		try {
 			String requestRaw = read(input);
+			
 			String[] requestLines = requestRaw.toString().split("\n");
 			RequestLineType lineType = RequestLineType.REQUEST_LINE;
+			
 			for (int idx = 0; idx < requestLines.length; idx++) {
 				String line = requestLines[idx];
 				if (idx == 0) {
 					parseRequestLine(line);
 					lineType = RequestLineType.HEADER_LINE;
 					continue;
-				} else if (line.isEmpty()) {
+				} else if (line.equals("\n")) {
 					lineType = RequestLineType.BODY_LINE;
 					continue;
 				}
 				
 				switch (lineType) {
 				case HEADER_LINE:
-					
+					parseAndAddHeader(line);
 					break;
 				case BODY_LINE:
-					
+					appendRequestBody(line);
 					break;
 				default:
 					break;
@@ -70,23 +72,23 @@ public class HttpRequest {
 	
 	private String read(InputStream input) throws IOException {
 		byte[] buffer = new byte[BUFFER_SIZE];
-		StringBuilder requestBuffer = new StringBuilder();
+		StringBuilder requestBuilder = new StringBuilder();
 		int i = 0;
-		while (true) {
+		while (input.available() > 0) {
 			buffer = new byte[BUFFER_SIZE];
             i = input.read(buffer);
 	        for (int j = 0; j < i; j++) {
-	            requestBuffer.append((char) buffer[j]);
-	        }
-	        if (input.available() <= 0) {
-	        	break;
+	        	requestBuilder.append((char) buffer[j]);
 	        }
 		}
-		return requestBuffer.toString();
+		return requestBuilder.toString();
 	}
 	
 	private void parseRequestLine(String line) throws Exception {
 		String[] requestInfos = line.split(" ");
+		if (requestInfos.length < 3) {
+			return;
+		}
 		this.method = requestInfos[0];
 		
 		String[] uriInfos = requestInfos[1].split("\\?");
@@ -107,11 +109,22 @@ public class HttpRequest {
 	}
 	
 	private void parseAndAddHeader(String line) {
-		
+		try {
+			String[] pair = line.split("\\:");
+			String key = pair[0].trim();
+			String value = pair[1].trim();
+			
+			this.headers.put(key, value);
+			
+			if (key.equalsIgnoreCase("cookie")) {
+				
+			}		
+		} catch (Exception e) {
+		}
 	}
 	
-	private void parseRequestBody(String line) {
-		
+	private void appendRequestBody(String line) {
+		this.body += line;
 	}
 	
 	public String getUri() {

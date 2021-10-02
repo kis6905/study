@@ -3,7 +3,6 @@ package leaf.web.basis.step2;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 
@@ -21,8 +20,7 @@ public class ServletThread extends Thread {
 	public void run() {
 		try (
 			InputStream input = socket.getInputStream();
-			OutputStream output = socket.getOutputStream();
-			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(output));
+			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
 		) {
 			HttpRequest httpRequest = new HttpRequest(input);
 			System.out.println("[" + Thread.currentThread().getName() + "] " + httpRequest.toString());
