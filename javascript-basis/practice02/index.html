@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>accumulator-app</title>
+
+  <style>
+    .btn, .operator, .reset {
+      width: 30px;
+      height: 30px;
+    }
+    .btn-2 {
+      width: 137px;
+      height: 30px;
+    }
+    .mt-3 {
+      margin-top: 3px;
+    }
+    .text-size-50 {
+      font-size: 50px;
+    }
+    .display-area {
+      width: 135px;
+      text-align: right;
+      border: solid black 1px;
+    }
+    #result {
+      font-size: 25px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="calc-wrap">
+    <div class="display-area">
+      <span id="result">0</span>
+    </div>
+    <div class="mt-3">
+      <button class="btn" value="7">7</button>
+      <button class="btn" value="8">8</button>
+      <button class="btn" value="9">9</button>
+      <button class="operator" value="/">/</button>
+    </div>
+    <div class="mt-3">
+      <button class="btn" value="4">4</button>
+      <button class="btn" value="5">5</button>
+      <button class="btn" value="6">6</button>
+      <button class="operator" value="*">*</button>
+    </div>
+    <div class="mt-3">
+      <button class="btn" value="1">1</button>
+      <button class="btn" value="2">2</button>
+      <button class="btn" value="3">3</button>
+      <button class="operator" value="-">-</button>
+    </div>
+    <div class="mt-3">
+      <button class="btn" disabled>&nbsp;</button>
+      <button class="btn" value="0">0</button>
+      <button class="reset" value="init">init</button>
+      <button class="operator" value="+">+</button>
+    </div>
+    <div class="mt-3">
+      <button class="btn-2" value="=">=</button>
+    </div>
+  </div>
+
+  <script src="custom.js"></script>
+</body>
+</html>

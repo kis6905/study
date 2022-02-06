@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*
+        filter, includes, find, slice, splice, concat, fill, findIndex, unshift
+      */
+
+      const dataList = [
+        {
+          id: 1,
+          like: 10,
+          isLike: false,
+          txt: 'JAVASCRIPT...JAVASCRIPT...JAVASCRIPT',
+          tag: ['JAVASCRIPT'],
+          date: '2021. 3. 24.',
+          comments: [
+            { name: '뽀로로', txt: '그냥 바보가 아니고?' },
+            { name: '크롱', txt: '크롱크롱크로오옹' },
+          ],
+        },
+        {
+          id: 2,
+          like: 15,
+          isLike: true,
+          txt: 'JAVA...JAVA...JAVA',
+          tag: ['JAVA'],
+          date: '2021. 5. 24.',
+          comments: [
+            { name: '정국', txt: '다이너마이트' },
+            { name: '슈가', txt: '버터' },
+          ],
+        },
+      ]
+
+      // 1. dataList에 특정 값이 포함되어 있는지 확인하라. includes 활용
+      const checkName = dataList.includes('isLike');
+      console.log(checkName)
+
+      // 2. dataList에 새로운 리스트를 채우세요.
+      const fillList = dataList.fill(1,2);
+      console.log(fillList)
+
+      // 3. dataList 중 like가 15이상인 요소의 인덱스를 찾아라.
+      const findListElem = dataList.findIndex((list) => list.like >= 15)
+      console.log(findListElem)
+
+      // 4. dataList 앞에 새로운 배열을 채우세요. - 기존 배열 변경
+      dataList.unshift('제니');
+      console.log(dataList)
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>store-app</title>
+
+  <style>
+    body {
+      margin: 2rem;
+    }
+    .contents {
+      display: flex;
+      width: 600px;
+    }
+    .store-list-view {
+      padding: 10px;
+      flex: 1;
+      height: 300px;
+      overflow-y: auto;
+      border: solid #32a1ce;
+    }
+    .detail-view {
+      margin-left: 1rem;
+      padding: 10px;
+      flex: 1;
+      height: 300px;
+      overflow-y: auto;
+      border: solid #32a1ce;
+    }
+    .pa-2 {
+      padding: 2px;
+    }
+    .ml-2 {
+      margin-left: 2px;
+    }
+    .mb-5 {
+      margin-bottom: 5px;
+    }
+    .detail-title {
+      margin: 3px;
+      font-weight: bold;
+    }
+    .display-flex {
+      display: flex;
+    }
+    .flex-7 {
+      flex: 0.7;
+    }
+    .flex-5 {
+      flex: 0.5;
+    }
+    .flex-4 {
+      flex: 0.4;
+    }
+    .flex-3 {
+      flex: 0.3;
+    }
+    .flex-2 {
+      flex: 0.2;
+    }
+    .flex-1 {
+      flex: 0.1;
+    }
+  </style>
+</head>
+<body>
+  <div class="contents">
+    <div class="store-list-view">
+      <template>
+        <div class="mb-5">
+          <span>버거킹</span>
+          <button class="menu-btn">메뉴</button>
+          <button class="review-btn">리뷰</button>
+        </div>
+        
+        <div class="mb-5">
+          <span>민소</span>
+          <button class="menu-btn">메뉴</button>
+          <button class="review-btn">리뷰</button>
+        </div>
+      </template>
+    </div>
+
+    <div class="detail-view" id="menuView" style="display: none;">
+      <div class="detail-title">
+        <span id="menuTitle"></span> - 메뉴
+      </div>
+
+      <hr/>
+      <div class="display-flex pa-2">
+        <div class="flex-7">메뉴명</div>
+        <div class="flex-3">가격</div>
+      </div>
+      
+      <div id="menuList">
+      </div>
+    </div>
+
+    <div class="detail-view" id="reviewView" style="display: none;">
+      <div class="detail-title">
+        <span id="reviewTitle"></span> - 리뷰
+      </div>
+
+      <div class="display-flex pa-2">
+        <div class="flex-5">내용</div>
+        <div class="flex-3 ml-2">작성자</div>
+        <div class="flex-2 ml-2">별점</div>
+      </div>
+
+      <hr/>  
+      
+      <div id="reviewList">
+        <template>
+          <div class="display-flex pa-2">
+            <div class="flex-5">다른 지점보다 맛있어요</div>
+            <div class="flex-3 ml-2">leaf</div>
+            <div class="flex-2 ml-2">4</div>
+          </div>
+          <div class="display-flex pa-2">
+            <div class="flex-5">사람이 별로 없어서 빨리나오네요</div>
+            <div class="flex-3 ml-2">shnee</div>
+            <div class="flex-2 ml-2">5</div>
+          </div>
+        </template>
+      </div>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="custom.js"></script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>movie-app</title>
+
+  <style>
+    body {
+      margin: 2rem;
+    }
+    .mb-5 {
+      margin-bottom: 5px;
+    }
+    .mb-20 {
+      margin-bottom: 20px;
+    }
+    .movie-panel {
+      display: flex;
+      flex-direction: row;
+      width: 350px;
+      white-space: nowrap;
+      overflow-x: auto;
+      border: 3px solid #0f6799;
+      padding: 5px;
+    }
+    .movie-card {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 85px;
+      min-width: 85px;
+      height: 100px;
+      padding: 3px;
+      margin: 3px;
+      border: 2px solid #844db4;
+      cursor: pointer;
+    }
+    .movie-title {
+      height: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div class="contents">
+    <div>
+      <h3>현재 상영 영화</h3>
+    </div>
+    <div class="movie-panel mb-20" id="playingMovieList">
+      <div class="movie-card">
+        <span>title1</span>
+      </div>
+      <div class="movie-card">
+        <span>title2</span>
+      </div>
+      <div class="movie-card">
+        <span>title3</span>
+      </div>
+      <div class="movie-card">
+        <span>title4</span>
+      </div>
+      <div class="movie-card">
+        <span>title5</span>
+      </div>
+    </div>
+
+    <div>
+      <h3>개봉 예정 영화</h3>
+    </div>
+    <div class="movie-panel mb-20" id="toBeReleaseMovieList">
+      <div class="movie-card">
+        <span>title6</span>
+      </div>
+      <div class="movie-card">
+        <span>title7</span>
+      </div>
+      <div class="movie-card">
+        <span>title8</span>
+      </div>
+      <div class="movie-card">
+        <span>title9</span>
+      </div>
+      <div class="movie-card">
+        <span>title10</span>
+      </div>
+      <div class="movie-card">
+        <span>title11</span>
+      </div>
+      <div class="movie-card">
+        <span>title12</span>
+      </div>
+    </div>
+
+    <h3 class="mb-5">영화 상세 정보</h3>
+    <div class="movie-detail-panel" id="movieDetail" style="display: none;">
+      <div>제목: 인질</div>
+      <div>개봉: 2021-08-18</div>
+      <div>등급: 15세 관람가</div>
+      <div>국가: 한국</div>
+      <div>장르: 액션, 스릴러</div>
+      <div>배급: (주)NEW</div>
+    </div>
+  </div>
+
+  <script>
+    let App = {};
+  </script>
+
+  <script src="data.js"></script>
+  <script src="class.js"></script>
+  <script>
+    const movieApp = new App.movieApp(
+      document.querySelector('.contents')
+    )
+    
+  </script>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title></title>
+  <script>
+    // 1. book 이란 변수에 info1, info2를 병합하세요.
+    const info1 = { title: 'javascript 시작하기', genre: 'IT' }
+    const info2 = { author: 'leaf', publishedDate: '2021-08-01' }
+    
+    const book = { ...info1, ...info2 }
+    const book2 = Object.assign(info1, info2);
+    console.log(book);
+    console.log(book2);
+
+
+    const posts = [
+      {
+        id: 0,
+        userId: 'gildong',
+        title: 'post #1',
+        createdDate: '2021-07-01 15:00:15',
+        comments: ['comment#1', 'comment#2', 'comment#3']
+      },
+      {
+        id: 1,
+        userId: 'gildong',
+        title: 'post #2',
+        createdDate: '2021-07-03 16:32:15',
+        comments: ['comment#4', 'comment#5', 'comment#6']
+      },
+      {
+        id: 2,
+        userId: 'leaf',
+        title: 'post #3',
+        createdDate: '2021-07-05 10:50:15',
+        comments: ['comment#7', 'comment#8', 'comment#9']
+      }
+    ]
+
+    // 2. posts 에서 userId가 leaf인 post만 찾아 새 array 를 만드세요.
+      const list = posts.filter((post) => post.userId === 'leaf');
+      console.log(list);
+
+    // 3. posts 에서 userId가 gildong인 post의 comments를 모두 병합한 새 array를 만드세요.
+      const userCommentList = posts
+                            .filter(post => post.userId === 'gildong')
+                            .flatMap(post => post.comments);
+      
+      // let comment = [];
+      // for(let i = 0; i < userComment.length; i++) {
+      //   comment = comment.concat(userComment[i].comments);
+      // }
+
+      // const result = comment[0].concat(comment[1]);
+      console.log(userCommentList);
+
+      // 4. posts의 title로만 구성된 새 array를 만드세요.
+      const titleList = posts.map(post => post.title)
+      
+      // 5. posts에서 id가 2 인 object를 찾아 foundPost 라는 변수에 할당하세요.
+      const foundPost = posts.find(post => post.id === 2)
+
+      // 6. posts의 모든 comments 개수 합을 구하세요. map reduce
+      let total = 0;
+      for (let i = 0; i < posts.length; i++) {
+        total += posts[i].comments.length;
+      }
+
+      const totalComments = posts.map(post => post.comments.length)
+                                .reduce(function(acc,cur) {
+                                    console.log(acc, cur)
+                                    return acc + cur
+                                }, 0);
+      console.log(totalComments)
+
+      // 7. posts의 userId의 길이가 가장 짧은 길이를 구하시오. map, reduce
+      const shortLength = posts.map(post => post.userId.length)
+                                .reduce(function(acc,cur) {
+                                  return acc > cur ? cur : acc
+                                })
+      console.log(shortLength);
+  </script>
+</head>
+<body>
+</body>
+</html>

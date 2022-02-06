@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let friends = [
+        {
+          id : 1,
+          name: 'Anna',
+          books: ['bible', 'harry potter'],
+          age: 18,
+          nickname: 'annasui',
+        },
+        {
+          id : 2,
+          name: 'Bob',
+          books: ['War and peace', 'Romeo and Juliet'],
+          age: 26,
+          nickname: 'babo',
+        }, 
+        {
+          id : 3,
+          name: 'Alice',
+          books: ['The Lord of the Rings', 'The Shining'],
+          age: 18,
+          nickname: 'wonderland',
+        },
+        {
+          id : 4,
+          name: 'Anna',
+          books: ['king', 'The Shining'],
+          age: 21,
+          nickname: 'annasui',
+        }
+      ]
+
+      // 1. friends에서 age가 18인 friend만 찾아서 새 array를 만드세요.
+      const findAge = friends.filter((friend) => friend.age === 18)
+      console.log(findAge)
+
+      // 2. friends에서 name이 Anna인 friend의 books를 모두 병합한 새 array를 만드세요.
+      const findAnna = friends
+                        .filter((friend) => friend.name === 'Anna')
+                        .flatMap(function(friend) {
+                          return friend.books
+                        })
+      console.log(findAnna)
+
+      // 3. friends의 nickname로만 구성된 새 array를 만드세요.
+      const nicknames = friends.map((friend) => friend.nickname)
+      console.log(nicknames)
+
+      // 4. friends의 id가 2 인 object를 찾아 foundFriend 라는 변수에 할당하세요.
+      const foundFriend = friends.find((friend) => friend.id === 2)
+      console.log(foundFriend)
+
+      // 5. friends의 모든 books 개수 합을 구하세요. map reduce
+      const totalBooks = friends
+                                .map((friend) => friend.books.length)
+                                .reduce((acc,cur) => acc + cur)
+      console.log(totalBooks)
+
+      // 6. friends의 name의 길이가 가장 짧은 길이를 구하시오. map, reduce
+      const shortName = friends
+                              .map((friend) => friend.name.length)
+                              .reduce((acc, cur) => acc > cur ? cur : acc )
+      console.log(shortName)
+
+    </script>
+  </body>
+</html>
