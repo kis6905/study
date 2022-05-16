@@ -1,4 +1,4 @@
-package study.java.basics;
+package com.leaf.basics;
 
 /**
  * Chapter05 - 객체와 클래스

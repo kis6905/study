@@ -1,4 +1,4 @@
-package study.java.basics;
+package com.leaf.basics;
 
 /**
  * Chapter06 - 객체지향 프로그래밍

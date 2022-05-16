@@ -1,4 +1,4 @@
-package study.java.basics;
+package com.leaf.basics;
 
 /**
  * Chapter02 - 연산자(Operator)

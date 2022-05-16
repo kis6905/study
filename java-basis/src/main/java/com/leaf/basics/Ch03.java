@@ -1,4 +1,4 @@
-package study.java.basics;
+package com.leaf.basics;
 
 /**
  * Chapter03 - 조건문과 반복문

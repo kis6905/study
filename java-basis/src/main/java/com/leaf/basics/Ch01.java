@@ -1,4 +1,4 @@
-package study.java.basics;
+package com.leaf.basics;
 
 /**
  * Chapter01 - 변수(Variable)
