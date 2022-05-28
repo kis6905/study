@@ -2,8 +2,7 @@ package com.leaf.basics;
 
 /**
  * Chapter10 - 제네릭
- * - 제네릭이란?
- *
+ * - 제네릭
  */
 public class Ch10 {
 
@@ -12,3 +11,5 @@ public class Ch10 {
 	}
 
 }
+
+
