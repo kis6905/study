@@ -1,6 +1,6 @@
 # Lambda
 
-#### 1. 다음 코드를 람다식을 사용하도록 변경하세요.
+#### 1. 다음 코드를 람다식과 Function interface 를 사용하도록 변경하세요.
 ```java
 public class Practice01 {
     public static void main(String[] args) {
