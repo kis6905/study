@@ -12,16 +12,14 @@ public class Practice01 {
 // TODO
 ```
 
-#### 2. ClassFactory class 에 String 을 입력받아 Class 를 새 인스턴스 객체를 리턴하는 static 메소드를 작성하세요.
-- 인스턴스는 타입은 Leaf, Doobyeol, Home 만 가능하며, 그 외 값인 경우 IllegalArgumentException 을 발생 시키세요.
+#### 2. Class 를 입력받아 새 인스턴스 객체를 리턴하는 "create()" 라는 이름의 static 메소드를 작성하세요.
+- 인스턴스 타입은 Leaf, Doobyeol, Home 만 가능하며, 그 외 값인 경우 IllegalArgumentException 을 발생 시키세요.
 ```java
 public class Practice02 {
     public static void main(String[] args) {
         
     }
-}
 
-class ClassFactory {
     // TODO
 }
 
