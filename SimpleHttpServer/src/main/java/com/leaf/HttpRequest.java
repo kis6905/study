@@ -7,12 +7,14 @@ public class HttpRequest {
 
     private Map<String, String> headers;
     private Map<String, String> parameters;
+    private Map<String, String> cookies;
     private String method;
     private String requestUri;
 
     public HttpRequest() {
         headers = new HashMap<>();
         parameters = new HashMap<>();
+        cookies = new HashMap<>();
     }
 
     public void parseRequestLine(String line) {
@@ -36,12 +38,32 @@ public class HttpRequest {
         }
     }
 
+    public void parseHeaderLine(String line) {
+        int index = line.indexOf(':');
+        String name = line.substring(0, index).trim();
+        String value = line.substring(index + 1).trim();
+
+        if ("cookie".equalsIgnoreCase(name)) {
+            parseCookie(value);
+        } else {
+            addHeader(name, value);
+        }
+    }
+
+    public void parseCookie(String line) {
+        String[] cookies = line.split(";");
+        for (String cookie : cookies) {
+            String[] pair = cookie.split("=");
+            addCookie(pair[0], pair[1]);
+        }
+    }
+
     public void addHeader(String name, String value) {
-        headers.put(name, value);
+        headers.put(name.toLowerCase(), value);
     }
 
     public String getHeader(String name) {
-        return headers.get(name);
+        return headers.get(name.toLowerCase());
     }
 
     public void addParameter(String name, String value) {
@@ -50,6 +72,14 @@ public class HttpRequest {
 
     public String getParameter(String name) {
         return parameters.get(name);
+    }
+
+    public void addCookie(String name, String value) {
+        cookies.put(name.trim(), value.trim());
+    }
+
+    public String getCookie(String name) {
+        return cookies.get(name);
     }
 
     public void setMethod(String method) {
