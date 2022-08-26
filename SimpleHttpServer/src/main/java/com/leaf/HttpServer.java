@@ -1,5 +1,7 @@
 package com.leaf;
 
+import com.leaf.enums.HttpStatus;
+
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -60,16 +62,21 @@ public class HttpServer {
                 }
             }
 
-            StringBuilder responseStringBuilder = new StringBuilder();
-            responseStringBuilder.append("HTTP/1.1 200 OK").append("\n");
-            responseStringBuilder.append("jwt: token").append("\n");
-            responseStringBuilder.append("content-type: text/html;").append("\n");
+            System.out.println("-----------------------------");
+            System.out.println("name: " + httpRequest.getParameter("name"));
+            System.out.println("age: " + httpRequest.getParameter("age"));
 
             String sessionId = httpRequest.getCookie("sessionId");
             HttpSession httpSession = null;
+
+            HttpResponse httpResponse = new HttpResponse(socket.getOutputStream());
+            httpResponse.setHttpStatus(HttpStatus.OK);
+            httpResponse.addHeader("doobyeol", "girlfriend");
+            httpResponse.addHeader("content-type", "text/html;charset=utf8");
+
             if (sessionId == null || sessionId.isEmpty()) {
                 sessionId = UUID.randomUUID().toString().replaceAll("-", "");
-                responseStringBuilder.append("set-cookie: sessionId=").append(sessionId).append("\n");
+                httpResponse.addCookie("sessionId", sessionId);
 
                 httpSession = new HttpSession();
                 httpSession.setAttribute("loginId", "leaf");
@@ -83,19 +90,7 @@ public class HttpServer {
                 System.out.println("session: " + httpSession.toString());
             }
 
-            responseStringBuilder.append("\n");
-            responseStringBuilder.append("<html>");
-            responseStringBuilder.append("<head>");
-            responseStringBuilder.append("</head>");
-            responseStringBuilder.append("<body>");
-            responseStringBuilder.append("  <h1>hello simple server!</h1>");
-            responseStringBuilder.append("</body>");
-            responseStringBuilder.append("</html>");
-
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-            bw.write(responseStringBuilder.toString());
-            bw.flush();
-            bw.close();
+            httpResponse.sendResponse();
         }
 
     }
