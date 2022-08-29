@@ -1,26 +1,23 @@
-package com.leaf;
+package com.leaf.http;
 
-import com.leaf.enums.HttpStatus;
+import com.leaf.http.enums.HttpStatus;
 
-import java.io.*;
-import java.net.ServerSocket;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.net.Socket;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 
-public class HttpServer {
+public class HttpThread implements Runnable {
 
-    public static final String REQUEST_HEADER_FINISH_LINE = "\r";
+    private Socket socket;
 
-    public static final Map<String, HttpSession> sessionMap = new HashMap<>();
+    public HttpThread(Socket socket) {
+        this.socket = socket;
+    }
 
-    public static void main(String[] args) throws Exception {
-        ServerSocket serverSocket = new ServerSocket(8080);
-
-        while (true) {
-            System.out.println("\n==============================================");
-            Socket socket = serverSocket.accept();
+    @Override
+    public void run() {
+        try {
             InputStream is = socket.getInputStream();
             ByteArrayOutputStream target = new ByteArrayOutputStream();
 
@@ -52,7 +49,7 @@ public class HttpServer {
                     flagOfRequestLine = 1;
                     httpRequest.parseRequestLine(line);
                 } else if (flagOfRequestLine == 1) {
-                    if (REQUEST_HEADER_FINISH_LINE.equals(line)) {
+                    if (HttpServer.REQUEST_HEADER_FINISH_LINE.equals(line)) {
                         flagOfRequestLine = 2;
                         continue;
                     }
@@ -81,18 +78,20 @@ public class HttpServer {
                 httpSession = new HttpSession();
                 httpSession.setAttribute("loginId", "leaf");
 
-                sessionMap.put(sessionId, httpSession);
+                HttpServer.sessionMap.put(sessionId, httpSession);
             } else {
-                httpSession = sessionMap.get(sessionId);
+                httpSession = HttpServer.sessionMap.get(sessionId);
                 if (httpSession == null) {
                     httpSession = new HttpSession();
                 }
                 System.out.println("session: " + httpSession.toString());
             }
 
+            Thread.sleep(5000);
+
             httpResponse.sendResponse();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
     }
-
 }

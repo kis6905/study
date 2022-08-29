@@ -1,4 +1,4 @@
-package com.leaf.enums;
+package com.leaf.http.enums;
 
 public enum HttpStatus {
     OK(200),

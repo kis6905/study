@@ -1,6 +1,6 @@
-package com.leaf;
+package com.leaf.http;
 
-import com.leaf.enums.HttpStatus;
+import com.leaf.http.enums.HttpStatus;
 
 import java.io.BufferedWriter;
 import java.io.OutputStream;
